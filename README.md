@@ -1,5 +1,5 @@
 # Squares
-_What do words look like as numbers? This mini project renders text as colors using python and saves them in a grid as an image. Below is an example of all the titles of Shaespears sonnets_
+_What do words look like as numbers? This mini project renders text as colors using python and saves them in a grid as an image. Below is an example of all the titles of Shakespears sonnets_
 
 ![](square.jpg)
 
