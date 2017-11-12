@@ -1,7 +1,7 @@
 # Squares
 _What do words look like as numbers? This mini project renders text as colors using python and saves them in a grid as a screenshot._
 
-![dfh](square.jpg)
+!['hi' hi there](square.jpg)
 
 ## How?
 Given a word, eg 'Abcd' each letter of the word is assigned a value to where it sits in the alphabet. A = 0, b = 1, etc. As RGB values only need 3 numbers, we use the remaining letters to tweek the initial values from the first three...
