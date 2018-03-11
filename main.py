@@ -113,7 +113,7 @@ def square_size(m, canvas_size):
         # m: a list of squared numbers
     canvas_sqrt = int(math.sqrt(m))
     w = float(canvas_size) / float(canvas_sqrt)
-    print 'Square width and height: ', float(w)
+    print('Square width and height: ', float(w))
     return w
 
 """ Part 3: Drawing
@@ -122,7 +122,7 @@ Tricky bit here is the correct iteration for filling columns
 """
 def draw():
     # draws the squares ont a canvas
-    canvas_size = 1000 # change this to required image size (could be input or variable)
+    canvas_size = 2000 # change this to required image size (could be input or variable)
     squares_per_row = canvas_size / square_size(m,canvas_size) # eg gives 3 squares for a 3x3 grid
     im = Image.new('RGB', (canvas_size,canvas_size), color='white') # draw the canvas
     draw = ImageDraw.Draw(im)
