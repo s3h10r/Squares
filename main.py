@@ -1,27 +1,51 @@
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from itertools import cycle
 import re
 import math
 import os
 
-def file_definition():
-    file = 'input/matrix.txt'
-    return file
+class Info(object):
+    def __init__(self, title, mode, file):
+        self.word_count = 0
+        self.mode = mode
+        self.title = title
+        self.file = file
 
-keyword_one = 'neo'
-key_color_one = [0, 255, 65]
-keyword_two = ''
+    def get_mode(self):
+        return self.mode
+
+    def set_word_count(self, count):
+        self.word_count += count
+
+    def get_word_count(self):
+        return self.word_count
+
+    def get_title(self):
+        return self.title
+
+    def get_file_definition(self):
+        return self.file
+
+# title = string
+# mode: 0 default, 1 with titles
+info = Info('Flash Gordon (1980)', 1, 'input/flashgordon.txt', )
+
+
+keyword_one = 'flash'
+key_color_one = [255, 0, 0]
+keyword_two = 'gordon'
 key_color_two = [255, 255, 0]
 """ Part one: Color prep."""
 
 def convert():
+    """ Part one: Color prep."""
     keyword_count = 0
 
     """ Takes an input of strings and converts it to 3 number values
     for RGB.
     Return: list of calculated numbers eg [255,344,56]
     """
-    with open(file_definition(), 'r') as myfile:
+    with open(info.get_file_definition(), 'r') as myfile:
         input = myfile.read().replace('\n', '')
     # sanitize input, @todo, probably needs to tested and improved more
     input = re.sub(r'([^\s\w]|_)+', '', input)
@@ -36,6 +60,7 @@ def convert():
 
     colorList = []
     for word in input:
+        info.set_word_count(1)
         """ For each individual word, convert the letters to a list.
         Each letter will be assigned a value corresponding to it's position
         in the alphabet.
@@ -176,7 +201,7 @@ def draw():
     # eg gives 3 squares for a 3x3 grid
     squares_per_row = canvas_size / square_size(m, canvas_size)
     im = Image.new('RGB', (canvas_size, canvas_size),
-                   color='black')  # draw the canvas
+                   color='white')  # draw the canvas
     draw = ImageDraw.Draw(im)
     # set s to square size using a float for accuracy
     s = float(square_size(m, canvas_size))
@@ -202,18 +227,18 @@ def draw():
             k = 0
         points = ((k * s, j * s), (k * s, j * s + s), (k * s + s, j * s + s),
                   (k * s + s, j * s))  # set points with incrementing values :/
-        draw.polygon((points[0], points[1], points[2], points[3]), outline='black', fill=(
+        draw.polygon((points[0], points[1], points[2], points[3]), outline='white', fill=(
             v[0], v[1], v[2]))  # outline='red', fill='blue'
         # borders so redraw the same plots with white lines
         draw.line((points[0], points[1], points[2], points[3], points[0]),
-                  fill="black", width=border_width)  # outline='red', fill='blue'
+                  fill="white", width=border_width)  # outline='red', fill='blue'
         k += 1
 
-    with open(file_definition(), 'r') as myfile:
+    with open(info.get_file_definition(), 'r') as myfile:
         file_name = os.path.basename(myfile.name)
         index_of_dot = file_name.index('.')
         file_name = file_name[:index_of_dot]
-        file_name_with_margin = 'output/{}_margin.jpg'.format(file_name)
+        file_name_with_margin = 'output/prints/{}_margin.jpg'.format(file_name)
         file_name = 'output/{}.jpg'.format(file_name)
         im.save(file_name)  # save the image.
 
@@ -221,8 +246,17 @@ def draw():
         old_im = Image.open(file_name)
         old_size = old_im.size
         new_size = (image_size_with_margin, image_size_with_margin)
-        new_im = Image.new("RGB", new_size, color='black')
+        new_im = Image.new("RGB", new_size, color='white')
         new_im.paste(old_im, ((int((new_size[0]-old_size[0])/2)), int((new_size[1]-old_size[1])/2)))
+
+        draw = ImageDraw.Draw(new_im)
+        # font = ImageFont.truetype(<font-file>, <font-size>)
+        font = ImageFont.truetype("fonts/OpenSans-Regular.ttf", 30)
+        # draw.text((x, y),"Sample Text",(r,g,b))
+        x_pos = margin_size / 2 + border_width
+        y_pos = base_size - (margin_size / 2 - 26)
+        if info.get_mode() == 1:
+            draw.text((x_pos, y_pos), '{} | {} words'.format(info.get_title(), info.get_word_count()), (0,0,0), font=font)
         new_im.save(file_name_with_margin)
 
 
