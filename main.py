@@ -5,7 +5,7 @@ import math
 import os
 
 def file_definition():
-    file = 'input/bb.txt'
+    file = 'input/labrynth.txt'
     return file
 
 """ Part one: Color prep."""
