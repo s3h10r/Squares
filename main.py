@@ -5,12 +5,12 @@ import math
 import os
 
 def file_definition():
-    file = 'input/labrynth.txt'
+    file = 'input/matrix.txt'
     return file
 
-keyword_one = 'flash'
-key_color_one = [255, 0, 0]
-keyword_two = 'gordon'
+keyword_one = 'neo'
+key_color_one = [0, 255, 65]
+keyword_two = ''
 key_color_two = [255, 255, 0]
 """ Part one: Color prep."""
 
@@ -29,6 +29,7 @@ def convert():
     input = input.lower()
     # split the input string to a long list ['word','other','other','etc'...]
     input = input.split()
+    print(input)
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
 "m", "n","o", "p", "q", "r", "s", "t", "u", "v", "w", "x",
 "y", "z", ""]
@@ -105,9 +106,9 @@ def convert():
             keyword_count += 1
         if word == keyword_two:
             colors = key_color_two
-
+            keyword_count += 1
         colorList.append(colors)
-
+    print(keyword_count)
     return colorList  # final list to work with
 
 
@@ -220,7 +221,7 @@ def draw():
         old_im = Image.open(file_name)
         old_size = old_im.size
         new_size = (image_size_with_margin, image_size_with_margin)
-        new_im = Image.new("RGB", new_size, color='white')
+        new_im = Image.new("RGB", new_size, color='black')
         new_im.paste(old_im, ((int((new_size[0]-old_size[0])/2)), int((new_size[1]-old_size[1])/2)))
         new_im.save(file_name_with_margin)
 
