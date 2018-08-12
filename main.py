@@ -145,7 +145,7 @@ def draw():
     # draws the squares ont a canvas
     # change this to required image size (could be input or variable)
     base_size = 5000
-    margin_size = 1000
+    margin_size = 250
     canvas_size = base_size - margin_size
     image_size_with_margin = base_size
     # eg gives 3 squares for a 3x3 grid
