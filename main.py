@@ -177,7 +177,7 @@ def draw():
         draw.line((points[0], points[1], points[2], points[3], points[0]),
                   fill="white", width=border_width)  # outline='red', fill='blue'
         k += 1
-    im.save('square.jpg')  # save the image.
+    im.save('output/square.jpg')  # save the image.
 
 
 draw()
