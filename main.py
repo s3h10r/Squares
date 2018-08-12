@@ -168,7 +168,10 @@ Tricky bit here is the correct iteration for filling columns
 def draw():
     # draws the squares ont a canvas
     # change this to required image size (could be input or variable)
-    canvas_size = 5000
+    base_size = 5000
+    margin_size = 250
+    canvas_size = base_size - margin_size
+    image_size_with_margin = base_size
     # eg gives 3 squares for a 3x3 grid
     squares_per_row = canvas_size / square_size(m, canvas_size)
     im = Image.new('RGB', (canvas_size, canvas_size),
@@ -204,11 +207,22 @@ def draw():
         draw.line((points[0], points[1], points[2], points[3], points[0]),
                   fill="black", width=border_width)  # outline='red', fill='blue'
         k += 1
+
     with open(file_definition(), 'r') as myfile:
         file_name = os.path.basename(myfile.name)
         index_of_dot = file_name.index('.')
         file_name = file_name[:index_of_dot]
-        im.save('output/{}.jpg'.format(file_name))  # save the image.
+        file_name_with_margin = 'output/{}_margin.jpg'.format(file_name)
+        file_name = 'output/{}.jpg'.format(file_name)
+        im.save(file_name)  # save the image.
+
+        #  Save a version of the file with a margin
+        old_im = Image.open(file_name)
+        old_size = old_im.size
+        new_size = (image_size_with_margin, image_size_with_margin)
+        new_im = Image.new("RGB", new_size, color='white')
+        new_im.paste(old_im, ((int((new_size[0]-old_size[0])/2)), int((new_size[1]-old_size[1])/2)))
+        new_im.save(file_name_with_margin)
 
 
 draw()
