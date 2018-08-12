@@ -2,14 +2,17 @@ from PIL import Image, ImageDraw
 from itertools import cycle
 import re
 import math
+import os
+
+def file_definition():
+    file = 'input/flashgordon.txt'
+    return file
 
 keyword_one = 'flash'
 key_color_one = [255, 0, 0]
 keyword_two = 'gordon'
 key_color_two = [255, 255, 0]
 """ Part one: Color prep."""
-
-
 
 def convert():
     keyword_count = 0
@@ -18,7 +21,7 @@ def convert():
     for RGB.
     Return: list of calculated numbers eg [255,344,56]
     """
-    with open('input.txt', 'r') as myfile:
+    with open(file_definition(), 'r') as myfile:
         input = myfile.read().replace('\n', '')
     # sanitize input, @todo, probably needs to tested and improved more
     input = re.sub(r'([^\s\w]|_)+', '', input)
@@ -201,7 +204,11 @@ def draw():
         draw.line((points[0], points[1], points[2], points[3], points[0]),
                   fill="black", width=border_width)  # outline='red', fill='blue'
         k += 1
-    im.save('output/square.jpg')  # save the image.
+    with open(file_definition(), 'r') as myfile:
+        file_name = os.path.basename(myfile.name)
+        index_of_dot = file_name.index('.')
+        file_name = file_name[:index_of_dot]
+        im.save('output/{}.jpg'.format(file_name))  # save the image.
 
 
 draw()
