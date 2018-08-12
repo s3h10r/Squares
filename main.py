@@ -3,17 +3,24 @@ from itertools import cycle
 import re
 import math
 
+keyword_one = 'flash'
+key_color_one = [255, 0, 0]
+keyword_two = 'gordon'
+key_color_two = [255, 255, 0]
 """ Part one: Color prep."""
 
 
+
 def convert():
+    keyword_count = 0
+
     """ Takes an input of strings and converts it to 3 number values
     for RGB.
     Return: list of calculated numbers eg [255,344,56]
     """
     with open('input.txt', 'r') as myfile:
         input = myfile.read().replace('\n', '')
-    # sanitise input, @todo, probably needs to tested and improved more
+    # sanitize input, @todo, probably needs to tested and improved more
     input = re.sub(r'([^\s\w]|_)+', '', input)
     input = ''.join([i for i in input if not i.isdigit()])
     input = input.lower()
@@ -31,6 +38,10 @@ def convert():
         """
         letters = list(word)  # eg ['w','o','r','d']
         number = []
+        # If keyword found, assign color and skip
+        # if word == keyword:
+        #     number.append(key_color)
+
         for i, letter in enumerate(letters):
             # Only three numbers needed for RGB so use the first three values as a base
             # eg: [10, 4, 21]
@@ -51,8 +62,8 @@ def convert():
                 # /26/26 to get even smaller numbers probably overkill but it makes sense mathematically.
                 letterPosition = alphabet.index(letter) * n / 26 / 26
                 number.append(letterPosition)
-
         # split the first 3 large values, and smaller 'addition' values to two lists
+
         colors = []
         additions = []
         for i, val in enumerate(number):
@@ -78,6 +89,19 @@ def convert():
             colors.append(255)
         if len(colors) < 3:
             colors.append(255)
+
+        """ rework for additional colors"""
+        # grey scale the colors in a way that's still random
+        average = int((sum(colors) / len(colors)))
+        colors = [average, average, average]
+
+
+        # If this word is our keyword, replace it with the key color.
+        if word == keyword_one:
+            colors = key_color_one
+            keyword_count += 1
+        if word == keyword_two:
+            colors = key_color_two
 
         colorList.append(colors)
 
@@ -145,7 +169,7 @@ def draw():
     # eg gives 3 squares for a 3x3 grid
     squares_per_row = canvas_size / square_size(m, canvas_size)
     im = Image.new('RGB', (canvas_size, canvas_size),
-                   color='white')  # draw the canvas
+                   color='black')  # draw the canvas
     draw = ImageDraw.Draw(im)
     # set s to square size using a float for accuracy
     s = float(square_size(m, canvas_size))
@@ -175,7 +199,7 @@ def draw():
             v[0], v[1], v[2]))  # outline='red', fill='blue'
         # borders so redraw the same plots with white lines
         draw.line((points[0], points[1], points[2], points[3], points[0]),
-                  fill="white", width=border_width)  # outline='red', fill='blue'
+                  fill="black", width=border_width)  # outline='red', fill='blue'
         k += 1
     im.save('output/square.jpg')  # save the image.
 
