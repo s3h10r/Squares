@@ -212,7 +212,7 @@ def draw():
         file_name = os.path.basename(myfile.name)
         index_of_dot = file_name.index('.')
         file_name = file_name[:index_of_dot]
-        file_name_with_margin = 'output/{}_margin.jpg'.format(file_name)
+        file_name_with_margin = 'output/prints/{}_margin.jpg'.format(file_name)
         file_name = 'output/{}.jpg'.format(file_name)
         im.save(file_name)  # save the image.
 
