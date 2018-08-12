@@ -5,7 +5,7 @@ import math
 import os
 
 def file_definition():
-    file = 'input/flashgordon.txt'
+    file = 'input/labrynth.txt'
     return file
 
 keyword_one = 'flash'
