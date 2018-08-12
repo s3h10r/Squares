@@ -11,7 +11,7 @@ def convert():
     for RGB.
     Return: list of calculated numbers eg [255,344,56]
     """
-    with open('input.txt', 'r') as myfile:
+    with open('input/input.txt', 'r') as myfile:
         input = myfile.read().replace('\n', '')
     # sanitise input, @todo, probably needs to tested and improved more
     input = re.sub(r'([^\s\w]|_)+', '', input)
