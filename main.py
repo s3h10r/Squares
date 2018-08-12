@@ -1,15 +1,30 @@
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from itertools import cycle
 import re
 import math
 import os
 
+
+class Info(object):
+    def __init__(self):
+        self.word_count = 0
+
+    def set_word_count(self, count):
+        self.word_count += count
+
+    def get_word_count(self):
+        return self.word_count
+
+info = Info()
+
+
 def file_definition():
-    file = 'input/labrynth.txt'
+    file = 'input/bb.txt'
     return file
 
-""" Part one: Color prep."""
+
 def convert():
+    """ Part one: Color prep."""
     """ Takes an input of strings and converts it to 3 number values
     for RGB.
     Return: list of calculated numbers eg [255,344,56]
@@ -28,6 +43,7 @@ def convert():
 
     colorList = []
     for word in input:
+        info.set_word_count(1)
         """ For each individual word, convert the letters to a list.
         Each letter will be assigned a value corresponding to it's position
         in the alphabet.
@@ -198,6 +214,13 @@ def draw():
         new_size = (image_size_with_margin, image_size_with_margin)
         new_im = Image.new("RGB", new_size, color='white')
         new_im.paste(old_im, ((int((new_size[0]-old_size[0])/2)), int((new_size[1]-old_size[1])/2)))
+
+        draw = ImageDraw.Draw(new_im)
+        # font = ImageFont.truetype(<font-file>, <font-size>)
+        font = ImageFont.truetype("fonts/OpenSans-Regular.ttf", 30)
+        # draw.text((x, y),"Sample Text",(r,g,b))
+        x_pos = margin_size / 2 + border_width
+        draw.text((x_pos, base_size - 110), '{} words'.format(info.get_word_count()), (0,0,0),font=font)
         new_im.save(file_name_with_margin)
 
 
