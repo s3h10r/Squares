@@ -28,7 +28,7 @@ class Info(object):
 
 # title = string
 # mode: 0 default, 1 with titles
-info = Info('Flash Gordon (1980)', 1, 'input/flashgordon.txt', )
+info = Info('Flash Gordon (1980)', 0, 'input/flashgordon.txt', )
 
 
 keyword_one = 'flash'
@@ -238,7 +238,7 @@ def draw():
         file_name = os.path.basename(myfile.name)
         index_of_dot = file_name.index('.')
         file_name = file_name[:index_of_dot]
-        file_name_with_margin = 'output/prints/{}_margin.jpg'.format(file_name)
+        file_name_with_margin = 'output/prints/{}_margin_{}.jpg'.format(file_name, info.get_mode())
         file_name = 'output/{}.jpg'.format(file_name)
         im.save(file_name)  # save the image.
 
@@ -254,7 +254,7 @@ def draw():
         font = ImageFont.truetype("fonts/OpenSans-Regular.ttf", 30)
         # draw.text((x, y),"Sample Text",(r,g,b))
         x_pos = margin_size / 2 + border_width
-        y_pos = base_size - (margin_size / 2 - 26)
+        y_pos = base_size - (margin_size / 2 + 36)
         if info.get_mode() == 1:
             draw.text((x_pos, y_pos), '{} | {} words'.format(info.get_title(), info.get_word_count()), (0,0,0), font=font)
         new_im.save(file_name_with_margin)
