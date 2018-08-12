@@ -4,10 +4,15 @@ import re
 import math
 import os
 
-
 class Info(object):
-    def __init__(self):
+    def __init__(self, title, mode, file):
         self.word_count = 0
+        self.mode = mode
+        self.title = title
+        self.file = file
+
+    def get_mode(self):
+        return self.mode
 
     def set_word_count(self, count):
         self.word_count += count
@@ -15,12 +20,15 @@ class Info(object):
     def get_word_count(self):
         return self.word_count
 
-info = Info()
+    def get_title(self):
+        return self.title
 
+    def get_file_definition(self):
+        return self.file
 
-def file_definition():
-    file = 'input/bb.txt'
-    return file
+# title = string
+# mode: 0 default, 1 with titles
+info = Info('Labyrinth (1986)', 1, 'input/labyrinth.txt')
 
 
 def convert():
@@ -29,7 +37,7 @@ def convert():
     for RGB.
     Return: list of calculated numbers eg [255,344,56]
     """
-    with open(file_definition(), 'r') as myfile:
+    with open(info.get_file_definition(), 'r') as myfile:
         input = myfile.read().replace('\n', '')
     # sanitise input, @todo, probably needs to tested and improved more
     input = re.sub(r'([^\s\w]|_)+', '', input)
@@ -200,7 +208,7 @@ def draw():
                   fill="white", width=border_width)  # outline='red', fill='blue'
         k += 1
 
-    with open(file_definition(), 'r') as myfile:
+    with open(info.get_file_definition(), 'r') as myfile:
         file_name = os.path.basename(myfile.name)
         index_of_dot = file_name.index('.')
         file_name = file_name[:index_of_dot]
@@ -220,7 +228,9 @@ def draw():
         font = ImageFont.truetype("fonts/OpenSans-Regular.ttf", 30)
         # draw.text((x, y),"Sample Text",(r,g,b))
         x_pos = margin_size / 2 + border_width
-        draw.text((x_pos, base_size - 110), '{} words'.format(info.get_word_count()), (0,0,0),font=font)
+        y_pos = base_size - (margin_size / 2 + 36)
+        if info.get_mode() == 1:
+            draw.text((x_pos, y_pos), '{} | {} words'.format(info.get_title(), info.get_word_count()), (0,0,0),font=font)
         new_im.save(file_name_with_margin)
 
 
