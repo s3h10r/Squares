@@ -236,6 +236,8 @@ def draw():
         if info.get_mode() == 1:
             draw.text((x_pos, y_pos), '{} | {} words'.format(info.get_title(), info.get_word_count()), (0,0,0),font=font)
         new_im.save(file_name_with_margin)
+        if info.get_mode() == 2:
+            draw.text((x_pos, y_pos), '{}'.format(info.get_title()), (0,0,0), font=font)
         print(info.get_word_count())
 
 
