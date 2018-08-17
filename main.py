@@ -18,7 +18,7 @@ class Info(object):
         self.word_count += count
 
     def get_word_count(self):
-        return self.word_count
+        return int(self.word_count)  # becaue it's ran twice
 
     def get_title(self):
         return self.title
@@ -28,7 +28,7 @@ class Info(object):
 
 # title = string
 # mode: 0 default, 1 with titles
-info = Info("The Big Book | Bill B", 1, 'input/bb.txt')
+info = Info("test ", 1, 'input/matrix.txt')
 
 
 def convert():
@@ -38,20 +38,22 @@ def convert():
     Return: list of calculated numbers eg [255,344,56]
     """
     with open(info.get_file_definition(), 'r') as myfile:
-        input = myfile.read().replace('\n', '')
+        input = myfile.read().replace('\n', ' ')
     # sanitise input, @todo, probably needs to tested and improved more
     input = re.sub(r'([^\s\w]|_)+', '', input)
     input = ''.join([i for i in input if not i.isdigit()])
     input = input.lower()
     # split the input string to a long list ['word','other','other','etc'...]
     input = input.split()
+    print('Input length {}'.format(len(input)))
+    print(input)
+    
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
 "m", "n","o", "p", "q", "r", "s", "t", "u", "v", "w", "x",
 "y", "z", ""]
 
     colorList = []
     for word in input:
-        info.set_word_count(1)
         """ For each individual word, convert the letters to a list.
         Each letter will be assigned a value corresponding to it's position
         in the alphabet.
@@ -169,7 +171,7 @@ def draw():
     # draws the squares ont a canvas
     # change this to required image size (could be input or variable)
     base_size = 5000
-    margin_size = 250
+    margin_size = 500
     canvas_size = base_size - margin_size
     image_size_with_margin = base_size
     # eg gives 3 squares for a 3x3 grid
@@ -179,7 +181,8 @@ def draw():
     draw = ImageDraw.Draw(im)
     # set s to square size using a float for accuracy
     s = float(square_size(m, canvas_size))
-
+    
+    
     # work out a suitable border width
     border_width = int((float(30) * float(s)) / 100)
 
@@ -188,6 +191,7 @@ def draw():
     j = 0  # vertical counter
     k = 0  # horizontal counter
     for i, v in enumerate(convert()):
+        info.set_word_count(1)
         """ If there is magic anywhere, it's here, this took a lot of effort!
         We want to draw horizontally, but when we reach the end of the canvas
         increase vertically by the width of a square, so we have a counter for
@@ -232,6 +236,7 @@ def draw():
         if info.get_mode() == 1:
             draw.text((x_pos, y_pos), '{} | {} words'.format(info.get_title(), info.get_word_count()), (0,0,0),font=font)
         new_im.save(file_name_with_margin)
+        print(info.get_word_count())
 
 
 draw()
