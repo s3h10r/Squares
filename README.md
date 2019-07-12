@@ -1,5 +1,21 @@
+
 # Squares
-_What do words look like as numbers? This mini project renders text as colors using python and saves them in a grid as an image. Below is an example of all the titles of Shakespears sonnets_
+_What do words look like as numbers? This mini project renders text as colors using python and saves them in a grid as an image._
+
+
+[This is a fork](https://github.com/s3h10r/Squares) of the 
+[original project](https://github.com/kevinhowbrook/Squares) 
+which adds some variations and shapes, restructures the code a bit etc.
+
+_Below is an example of representing the sourcecode itself in different variations added in this fork_
+
+<img src="print_brainstorming_words_1_1_1.png" width="40%"></img>
+<img src="print_squarecode_1_2_0.png" width="40%"></img>
+<img src="print_squarecode_0_2_0.png" width="40%"></img>
+<img src="print_squarecode_1_10_opacity-variation-on.png" width="40%"></img>
+
+
+_Below is an example of all the titles of Shakespears sonnets_
 
 <img src="square.jpg"></img>
 
