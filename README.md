@@ -9,10 +9,10 @@ which adds some variations and shapes, restructures the code a bit etc.
 
 _Below is an example of representing the sourcecode itself in different variations added in this fork_
 
-<img src="print_brainstorming_words_1_1_1.png" width="40%"></img>
-<img src="print_squarecode_1_2_0.png" width="40%"></img>
-<img src="print_squarecode_0_2_0.png" width="40%"></img>
-<img src="print_squarecode_1_10_opacity-variation-on.png" width="40%"></img>
+<img src="print_brainstorming_words_1_1_1.png" width="48%"></img>
+<img src="print_squarecode_1_2_0.png" width="48%"></img>
+<img src="print_squarecode_0_2_0.png" width="48%"></img>
+<img src="print_squarecode_1_10_opacity-variation-on.png" width="48%"></img>
 
 
 _Below is an example of all the titles of Shakespears sonnets_
