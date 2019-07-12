@@ -1,0 +1,7 @@
+fork-2.0.2
+
+- restructures code
+- adds shapes (circle)
+- adds variations (size, opacity)
+- changes hardcoded variables to arguments
+- adds examples representing the new features  
