@@ -52,4 +52,12 @@ I've being trying to learn more python (and kepp up a creative practice), this w
 
 ## Who?
 Setting the placement of the plots involved tricky math, thanks to Ashley Burdett for helping.
- 
+
+
+# Circles
+
+**experimental** (lab-branch) - additional version derived from Squares which changes the
+layout to a orbit-like thingy... not sure if i am sure... ;)
+
+
+<img src="print_circles_1_2_1.png" width="100%"></img>
