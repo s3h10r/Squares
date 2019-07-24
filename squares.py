@@ -38,11 +38,11 @@ import sys
 
 from PIL import Image, ImageDraw, ImageFont
 
-__version__ = "fork-2.0.2"
+__version__ = "fork-2.0.4"
 
 
 class Square(object):
-    def __init__(self, title, mode, file, shape = 0, svmode = 0, ovmode = 0, image_size = 5000):
+    def __init__(self, title, mode, file, shape = 0, svmode = 0, ovmode = 0, image_size = 5000, font = "fonts/OpenSans-Regular.ttf"):
         # change this to required image size (could be input or variable)
         self.base_size = image_size
         self.margin_size = int(self.base_size / 10)
@@ -56,6 +56,7 @@ class Square(object):
         self.mode = mode
         self.title = title
         self.file = file
+        self.font = font
         self.shape = shape
         self.square_border_width = None
         self.svmode = svmode #size-variation_mode (0 = no variation)
@@ -258,6 +259,9 @@ class Square(object):
     def get_color_list(self):
         return self.color_list
 
+    def get_image(self):
+        return self.image
+
     def draw(self):
         # draws the shape (square=0, circle=1, ...) on the squares of canvas
         # eg gives 3 squares for a 3x3 grid
@@ -395,9 +399,8 @@ class Square(object):
         new_im = Image.new("RGB", new_size, color='white')
         new_im.paste(old_im, ((int((new_size[0]-old_size[0])/2)), int((new_size[1]-old_size[1])/2)))
         draw = ImageDraw.Draw(new_im)
-        # font = ImageFont.truetype(<font-file>, <font-size>)
         font_size = int(0.6 * self.get_image_size() / 100.0)
-        font = ImageFont.truetype("fonts/OpenSans-Regular.ttf", font_size)
+        font = ImageFont.truetype(self.font, font_size)
         txt = '{} | {} words | shape {} | svmode {} | ovmode {}'.format(
             self.get_title() + " v" + __version__, self.get_word_count(),
             str(self.get_shape()), str(self.get_svmode()), str(self.get_ovmode()))
