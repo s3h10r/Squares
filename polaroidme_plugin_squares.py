@@ -70,4 +70,4 @@ if __name__ == '__main__':
 # === END polaroidme plugin-interface
 
 # --- .. here comes the plugin-specific part to get some work done...
-from ..squares import Square
+from .squares import Square
