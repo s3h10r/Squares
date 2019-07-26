@@ -4,18 +4,19 @@
 # === polaroidme plugin-interface ===
 # --- all polaroidme-plugins (generators, filters) must implement this
 import logging
+import random
 import string
 from polaroidme.helpers import get_resource_file
 
 name = "squares+circles"
 description = "text in picture out"
 kwargs = {'textfile' : __file__,
-          'shape' : 1, 'svmode' : 1, 'ovmode' : 1,
+          'shape' : random.randint(0,1), 'svmode' : 1, 'ovmode' : 0,
           'size'  : 800,
           'font'  : get_resource_file('fonts/default.ttf')}
 args=None
 author = "Original (c) 2017 Kevin Howbrook. Fork, refactoring & extension (c) 2019 Sven Hessenmüller"
-version = '0.1.2'
+version = '0.1.4'
 __version__ = version
 
 # --- configure logging
@@ -28,7 +29,7 @@ log.addHandler(handler)
 # ---
 
 
-def run(textfile = None, shape = 1, svmode = 1, ovmode = 1, size = 800, font=None):
+def run(textfile = None, shape = 1, svmode = 1, ovmode = 0, size = 800, font=None):
     """
     this is the wrapper around the functionality of the plugin.
     """
