@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 #coding=utf-8
 
-# === polaroidme plugin-interface ===
-# --- all polaroidme-plugins (generators, filters) must implement this
+# === einguteswerkzeug plugin-interface ===
+# --- all einguteswerkzeug-plugins (generators, filters) must implement this
 import logging
 import random
 import string
-from polaroidme.helpers import get_resource_file
+from einguteswerkzeug.helpers import get_resource_file
 
 name = "squares+circles"
 description = "text in picture out"
@@ -42,7 +42,7 @@ def run(textfile = None, shape = 1, svmode = 1, ovmode = 0, size = 800, font=Non
     ga.draw()
     return ga.get_image(), "generator %s v%s" % (name, __version__)
 
-# --- END all polaroidme-plugins (generators, filters) must implement this
+# --- END all einguteswerkzeug-plugins (generators, filters) must implement this
 
 def get_plugin_doc(format='text'):
     """
@@ -68,7 +68,7 @@ def get_plugin_doc(format='text'):
 if __name__ == '__main__':
     print(get_plugin_doc())
 
-# === END polaroidme plugin-interface
+# === END einguteswerkzeug plugin-interface
 
 # --- .. here comes the plugin-specific part to get some work done...
 from .squares import Square
