@@ -1,0 +1,1 @@
+egw_plugin_squares.py
